@@ -1,5 +1,5 @@
 function ImageCreator(coordinates)
-standardX = 1070;
+standardX = 710;
 
 colors = zeros(30,1,3);
 colors(:,:,1) = [128*ones(15,1);255*ones(15,1)];
@@ -21,7 +21,12 @@ relativeCoo = [round(coordinates(:,1)*proportion) ,round(coordinates(:,2)* ...
            
 rgb = zeros(round(maxX*proportion+10),round(maxY*proportion+10),3,'uint8');
 
-rgb(relativeCoo(:,1,:),relativeCoo(:,2,:),:) = colors(mod(relativeCoo(:,3,:),30),1,:);
+%rgb(relativeCoo(:,1,:),relativeCoo(:,2,:),:) = colors(mod(relativeCoo(:,3,:),30),1,:);
+for i=1:length(relativeCoo)
+    rgb(relativeCoo(i,1),relativeCoo(i,2),1)=colors(relativeCoo(i,3),1,1);
+    rgb(relativeCoo(i,1),relativeCoo(i,2),2)=colors(relativeCoo(i,3),1,2);
+    rgb(relativeCoo(i,1),relativeCoo(i,2),3)=colors(relativeCoo(i,3),1,3);
+end
 
 imwrite(rgb, 'out.png');
 
