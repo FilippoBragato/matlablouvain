@@ -1,3 +1,6 @@
-out.png
-flame.txt
-in.txt
+*.txt
+*.png
+*.pdf
+*.mat
+*.fig
+*.jpg
