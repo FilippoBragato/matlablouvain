@@ -1,5 +1,13 @@
-function [community]= Louvain(adj)
-
+function community = Louvain(adj)
+% LOUVAIN divide un grafo in community tramite l'algoritmo di Louvain
+%
+%   community = LOUVAIN(adj) crea un array di dimensione n, numero di nodi,
+%   in cui assegna ogni nodo ad una community, nell'ordine in cui questi
+%   appaiono nella matrice delle adiacenze adj in input.
+%
+%   La notazione utilizzata è in accordo con la pagina Wikipedia <a
+%   href="matlab: web('https://en.wikipedia.org/wiki/Louvain_method')"
+%   >Louvain Method</a>
 if(~issymmetric(adj))
     ME = MException('Input matrix is not symmetric');
     throw(ME);
@@ -43,7 +51,8 @@ while (ending == false)
     matrix = matrix((~alive==0),(~alive==0));
     alive = alive(~(alive==0));
 end
-
+%Allineo le community in modo che vengano rappresentate con un insieme di
+%interi da 1 a C (numero di community)
 uniComm = unique(community);
 for i=1:length(uniComm)
     community(community==uniComm(i)) = max(uniComm) +i;
