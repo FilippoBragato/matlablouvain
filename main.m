@@ -1,8 +1,8 @@
 % MAIN esegue l'algoritmo di Louvain
 %   Alla fine dell'esecuzione viene mostrata una rappresentazione
-%   bidimensionale dell'output, che poi ciene salvata in un file .png
+%   bidimensionale dell'output, che poi viene salvata in un file .png
 %
-%   name: il nome del file di tipo txt da cui vengono prese le coordinate
+%   name: il nome del file di tipo .txt da cui vengono prese le coordinate
 %   in input
 %
 %   random: se true riordina in modo casuale i punti in ingresso
@@ -15,27 +15,28 @@
 clc;
 clear;
 close all;
-
-name = 'random';
-pathfile = strcat(name, '.txt');
-solution = false;
-random = true;
-trials = 1;
+%% PARAMETRI
+name = 'Aggregation';
+solution = true;
+random = false;
+trials = 100;
 maxDistance = 0;
 % Se non si usa la funzione random non ha senso fare più di una iterazione
 if(~random)
     trials = 1;
 end
+%%
+pathfile = strcat('input/',name, '.txt');
 maxMod = -0.5;
 for i = 1:trials
-    disp('Sto eseguendo il trial ');
+    disp('Sto eseguendo il tentativo ');
     disp(i);
     [adj, coordinates]= AdjMaker(pathfile, solution, random);
     % Gli archi che pesano meno del minimo (legato alla distanza) vengono rimossi 
     if maxDistance > 0
         adj(adj < 1/maxDistance^2) = 0;
     end
-    numberOfArch=length(find(adj));
+    numberOfArch=length(find(adj))/2;
     community = Louvain(adj);
     q = ModularityCalcolator(adj, community);
     disp(strcat('Ho trovato modularità= ', string(q)));
@@ -50,6 +51,7 @@ end
 % come matrice delle coordinate dei punti e relativa community in un file  
 % di tipo .mat con lo stesso nome
 name = strcat(name,'_', string(size(coordinates,1)), '_', string(numberOfArch));
+display(maxMod);
 coordinates=[betterCoo, betterComm(:)];
 ImageCreator(coordinates, name);
-save(name, 'coordinates');
+save(strcat('output/',name), 'coordinates');

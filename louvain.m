@@ -8,6 +8,8 @@ function community = Louvain(adj)
 %   La notazione utilizzata è in accordo con la pagina Wikipedia <a
 %   href="matlab: web('https://en.wikipedia.org/wiki/Louvain_method')"
 %   >Louvain Method</a>
+
+%% Inizializzazione
 if(~issymmetric(adj))
     ME = MException('Input matrix is not symmetric');
     throw(ME);
@@ -22,6 +24,7 @@ community = 1:size(adj,1);
 alive = community;
 ending = false;
 m = sum(matrix, 'all')/2;
+%% Corpo
 while (ending == false)
     ending = true;
     for i_c = 1:length(matrix) %i_c rappresenta il nodo che si sta per spostare
@@ -51,7 +54,7 @@ while (ending == false)
     matrix = matrix((~alive==0),(~alive==0));
     alive = alive(~(alive==0));
 end
-%Allineo le community in modo che vengano rappresentate con un insieme di
+%% Allineo le community in modo che vengano rappresentate con un insieme di
 %interi da 1 a C (numero di community)
 uniComm = unique(community);
 for i=1:length(uniComm)

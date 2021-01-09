@@ -8,9 +8,14 @@ function ImageCreator(coordinates, name)
 %   rappresentati con lo stesso colore. name è il nome con cui verrà
 %   salvata l'immagine
 %
-%   standardX: la dimensione in pixel della larghezza dell'immagine -10
-standardX = 470;
+%   standardX: la dimensione in pixel della larghezza dell'immagine
 
+%% PARAMETRI
+standardX = 720;
+nodeDimension = 5;
+
+%%
+standardX = standardX -2*nodeDimension;
 colors = zeros(125,3);
 for r = 0:1:4
     for g = 0:1:4
@@ -36,14 +41,20 @@ relativeCoo = [round(coordinates(:,1)*proportion) ,round(coordinates(:,2)* ...
                proportion) , coordinates(:,3)];
 %Se qualche coordinata fosse nulla, viene impostata a 1
 relativeCoo(relativeCoo==0)=1;
-rgb = zeros(round(maxX*proportion+10),round(maxY*proportion+10),3,'uint8');
+rgb = 255*ones(standardX +2*nodeDimension,round(maxY*proportion+10),3,'uint8');
 
 for i=1:length(relativeCoo)
-    rgb(relativeCoo(i,1),relativeCoo(i,2),1)=colors(mod(relativeCoo(i,3)*97,119)+1,1);
-    rgb(relativeCoo(i,1),relativeCoo(i,2),2)=colors(mod(relativeCoo(i,3)*97,119)+1,2);
-    rgb(relativeCoo(i,1),relativeCoo(i,2),3)=colors(mod(relativeCoo(i,3)*97,119)+1,3);
+    rgb(relativeCoo(i,1):relativeCoo(i,1)+nodeDimension-1,relativeCoo(i,2): ...
+        relativeCoo(i,2)+nodeDimension-1,1)=ones(nodeDimension, 'uint8')*   ...
+        colors(mod(relativeCoo(i,3)*97,119)+1,1);
+    rgb(relativeCoo(i,1):relativeCoo(i,1)+nodeDimension-1,relativeCoo(i,2): ...
+        relativeCoo(i,2)+nodeDimension-1,2)=ones(nodeDimension, 'uint8')*   ...
+        colors(mod(relativeCoo(i,3)*97,119)+1,2);
+    rgb(relativeCoo(i,1):relativeCoo(i,1)+nodeDimension-1,relativeCoo(i,2): ...
+        relativeCoo(i,2)+nodeDimension-1,3)=ones(nodeDimension, 'uint8')*   ...
+        colors(mod(relativeCoo(i,3)*97,119)+1,3);
 end
 
 imshow(rgb);
-imwrite(rgb, strcat(name, '.png'));
+imwrite(rgb, strcat('output/',name, '.png'));
 
