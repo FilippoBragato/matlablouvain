@@ -9,6 +9,9 @@ function ImageCreator(coordinates, name)
 %   salvata l'immagine
 %
 %   standardX: la dimensione in pixel della larghezza dell'immagine
+%
+%   nodeDimension: Imposta la dimensione del lato del quadrato con cui 
+%   viene rappresentato un nodo.
 
 %% PARAMETRI
 standardX = 720;

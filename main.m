@@ -10,8 +10,9 @@
 %   trials: imposta quante volte viene iterato l'algoritmo, alla fine viene
 %   mostrato solo il risultato a modularità più alta
 %
-%   maxDistance: imposta qual è la distanza massima con viene creato un arco
-%   tra ogni coppia di nodi, se è 0 tutte le coppie di nodi sono connesse
+%   maxDistance: imposta qual è la distanza massima tra due nodi affinché 
+%   venga creato un arco tra di loro, se è 0 tutte le coppie di nodi sono 
+%   connesse
 clc;
 clear;
 close all;
