@@ -5,11 +5,7 @@
 %   name: il nome del file di tipo .txt da cui vengono prese le coordinate
 %   in input
 %
-%   solution: se true si suppone che nel file di tipo .txt ogni nodo sia 
-%   identificato da tre valori (coordinate e community di appartenenza), in
-%   questo caso la community di appartenenza viene ignorata.
-%   Se false si suppone che che nel file di tipo .txt ogni nodo sia 
-%   identificato da due valori (coordinate)
+%   solution: se true si suppo
 %
 %   random: se true riordina in modo casuale i punti in ingresso
 %

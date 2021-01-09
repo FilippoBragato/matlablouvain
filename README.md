@@ -8,6 +8,9 @@ Prima di eseguire la demo è necessario configurare la sezione parametri del fil
 
 *name*: il nome del file di tipo .txt da cui vengono prese le coordinate in input, senza estensione
 
+*solution*: se true si suppone che nel file di tipo .txt ogni nodo sia identificato da tre valori (coordinate e community di appartenenza), in questo caso la community di appartenenza viene ignorata.
+Se false si suppone che che nel file di tipo .txt ogni nodo sia identificato da due valori (coordinate)
+
 *random*: se true riordina in modo casuale i nodi in ingresso
 
 *trials*: imposta quante volte viene iterato l'algoritmo, alla fine viene mostrato solo il risultato con modularità più alta
